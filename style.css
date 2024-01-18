@@ -1,0 +1,25 @@
+.day-of-week{
+  color: #483D8B;
+  font-family: fantasy;
+}
+
+.welcome{
+  color: white;
+  font-family: fantasy;
+}
+
+.body{
+  background-color: black;
+  text-align: center;
+}
+
+.intro{
+  color: white;
+
+}
+
+#activity-select{
+  background-color: white;
+  color: black;
+  margin-bottom: 100px;
+}
