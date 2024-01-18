@@ -1,3 +1,8 @@
+#jsonContainer{
+  color: #483D8B;
+  font-family: fantasy;
+}
+
 .day-of-week{
   color: #483D8B;
   font-family: fantasy;
@@ -6,20 +11,27 @@
 .welcome{
   color: white;
   font-family: fantasy;
+  border: 2px solid pink;
+  padding: 20px;
+  background-color: pink;
 }
 
 .body{
-  background-color: black;
+  background-image: url(https://wallpapercave.com/wp/wp3516805.jpg);
   text-align: center;
 }
 
 .intro{
   color: white;
-
+  font-family: fantasy;
 }
 
 #activity-select{
   background-color: white;
   color: black;
   margin-bottom: 100px;
+}
+
+#weather-icon{
+  color: white;
 }
