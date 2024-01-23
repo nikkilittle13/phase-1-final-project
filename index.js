@@ -18,21 +18,53 @@ dataseries.forEach(obj => {
 
   const formattedDate = date.toLocaleDateString('en-US', options);
 
+  const maxTempCelsius = obj.temp2m.max;
+  const minTempCelsius = obj.temp2m.min;
+  const maxTempFahrenheit = Math.round((maxTempCelsius * 9/5) + 32);
+  const minTempFahrenheit = Math.round((minTempCelsius * 9/5) + 32);
+
   const jsonDate = document.createElement('h2');
   const weatherIcon = document.createElement('div');
+  const activitySelection = document.createElement('select');
+
+  const option1 = document.createElement('option');
+option1.value = "";
+option1.textContent = "--Please choose an activity--";
+
+const option2 = document.createElement('option');
+option2.value = "run";
+option2.textContent = "Go for a run outside";
+
+const option3 = document.createElement('option');
+option3.value = "clean";
+option3.textContent = "Deep clean a room in the house";
+
+const option4 = document.createElement('option');
+option4.value = "swim";
+option4.textContent = "Swim 20 laps";
+
+const option5 = document.createElement('option');
+option5.value = "dance";
+option5.textContent = "Indoor dance workout";
+
+const option6 = document.createElement('option');
+option6.value = "other";
+option6.textContent = "Other";
+
+// Append the options to the activitySelection select element
+activitySelection.appendChild(option1);
+activitySelection.appendChild(option2);
+activitySelection.appendChild(option3);
+activitySelection.appendChild(option4);
+activitySelection.appendChild(option5);
+activitySelection.appendChild(option6);
 
   jsonDate.textContent = `${formattedDate}`;
 
-  const maxTempCelsius = obj.temp2m.max;
-  const minTempCelsius = obj.temp2m.min;
-  const maxTempFahrenheit = (maxTempCelsius * 9/5) + 32;
-  const minTempFahrenheit = (minTempCelsius * 9/5) + 32;
-
-  weatherIcon.textContent = `Weather: ${obj.weather}, Max Temp: ${maxTempFahrenheit}, Min Temp: ${minTempFahrenheit}, Max Wind Speed: ${obj.wind10m_max}`;
+  weatherIcon.textContent = `Weather: ${obj.weather}, Max Temp: ${maxTempFahrenheit}°F, Min Temp: ${minTempFahrenheit}°F, Max Wind Speed: ${obj.wind10m_max}`;
   jsonContainer.appendChild(jsonDate);
   jsonContainer.appendChild(weatherIcon);
+  jsonContainer.appendChild(activitySelection);
 });
 })
 .catch(error => console.log(error));
-
-
