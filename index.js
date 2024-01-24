@@ -1,10 +1,11 @@
+document.addEventListener("DOMContentLoaded", (event) => {
 fetch("https://www.7timer.info/bin/civillight.php?lon=-75.16&lat=39.95&ac=0&unit=metric&output=json&tzshift=0")
 .then(resp => resp.json())
 .then(data => {
 const jsonContainer = document.getElementById('jsonContainer');
 const dataseries = data.dataseries;
 
-dataseries.forEach(obj => {
+dataseries.forEach (obj => {
   const dateFromAPI = obj.date;
   const date = new Date(dateFromAPI.toString().substr(0, 4), dateFromAPI.toString().substr(4, 2) - 1, dateFromAPI.toString().substr(6, 2));
 
@@ -17,6 +18,7 @@ dataseries.forEach(obj => {
   };
 
   const formattedDate = date.toLocaleDateString('en-US', options);
+
 
   const maxTempCelsius = obj.temp2m.max;
   const minTempCelsius = obj.temp2m.min;
@@ -58,18 +60,31 @@ dataseries.forEach(obj => {
   activitySelection.appendChild(option5);
   activitySelection.appendChild(option6);
 
-  jsonDate.textContent = `${formattedDate}`;
+  jsonDate.textContent = `${formattedDate}`; 
 
   weatherIcon.textContent = `Weather: ${obj.weather}, Max Temp: ${maxTempFahrenheit}°F, Min Temp: ${minTempFahrenheit}°F, Max Wind Speed: ${obj.wind10m_max}`;
 
   activitySelection.addEventListener('change', () => {
     const selectedOption = activitySelection.value;
+    if (selectedOption === "other") {
+      const inputContainer = document.createElement('div');
+      const inputBox = document.createElement('input');
+      inputBox.type = 'text';
+      const submitButton = document.createElement('button');
+      submitButton.type = 'submit';
+
+      jsonContainer.replaceChild(inputBox, activitySelection);
+      jsonContainer.appendChild(submitButton);
+
+    } else {
     const selectedOptionText = activitySelection.options[activitySelection.selectedIndex].textContent;
     const selectedOptionDisplay = document.createElement('p');
     selectedOptionDisplay.textContent = `Activity: ${selectedOptionText}`;
 
     jsonContainer.replaceChild(selectedOptionDisplay, activitySelection);
-  });
+  };
+});
+
 
   jsonContainer.appendChild(jsonDate);
   jsonContainer.appendChild(weatherIcon);
@@ -77,3 +92,4 @@ dataseries.forEach(obj => {
 })
 })
 .catch(error => console.log(error));
+});

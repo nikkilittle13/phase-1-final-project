@@ -17,12 +17,12 @@
 }
 
 .body{
-  background-image: url(https://wallpapercave.com/wp/wp3516805.jpg);
+  background-color: rgba(127, 121, 121, 0.429);
   text-align: center;
 }
 
 .intro{
-  color: white;
+  color: pink;
   font-family: fantasy;
 }
 
