@@ -73,8 +73,9 @@ dataseries.forEach (obj => {
       const submitButton = document.createElement('button');
       submitButton.type = 'submit';
 
-      jsonContainer.replaceChild(inputBox, activitySelection);
-      jsonContainer.appendChild(submitButton);
+      inputContainer.appendChild(inputBox);
+      inputContainer.appendChild(submitButton);
+      jsonContainer.replaceChild(inputContainer, activitySelection);
 
     } else {
     const selectedOptionText = activitySelection.options[activitySelection.selectedIndex].textContent;
