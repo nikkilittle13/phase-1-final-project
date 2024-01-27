@@ -62,7 +62,12 @@ dataseries.forEach (obj => {
 
   jsonDate.textContent = `${formattedDate}`; 
 
-  weatherIcon.textContent = `Weather: ${obj.weather}, Max Temp: ${maxTempFahrenheit}°F, Min Temp: ${minTempFahrenheit}°F, Max Wind Speed: ${obj.wind10m_max}`;
+  weatherIcon.innerHTML = `
+  <div>Weather: ${obj.weather}</div>
+  <div>Max Temp: ${maxTempFahrenheit}°F</div>
+  <div>Min Temp: ${minTempFahrenheit}°F</div>
+  <div>Max Wind Speed: ${obj.wind10m_max}</div>
+  `;
 
   activitySelection.addEventListener('change', () => {
     const selectedOption = activitySelection.value;
