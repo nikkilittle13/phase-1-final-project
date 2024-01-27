@@ -66,23 +66,34 @@ dataseries.forEach (obj => {
 
   activitySelection.addEventListener('change', () => {
     const selectedOption = activitySelection.value;
+
     if (selectedOption === "other") {
       const inputContainer = document.createElement('div');
-      const inputBox = document.createElement('input');
-      inputBox.type = 'text';
-      const submitButton = document.createElement('button');
-      submitButton.type = 'submit';
+        const inputBox = document.createElement('input');
+        inputBox.type = 'text';
+        inputBox.placeholder = "Enter activity";
+          const submitButton = document.createElement('button');
+          submitButton.type = 'submit';
+          submitButton.textContent = 'Enter';
 
       inputContainer.appendChild(inputBox);
       inputContainer.appendChild(submitButton);
       jsonContainer.replaceChild(inputContainer, activitySelection);
 
+      submitButton.addEventListener('click', () => {
+        const submittedActivity = inputBox.value;
+        const submittedActivityDisplay = document.createElement('p'); 
+        submittedActivityDisplay.classList = "submitted-activity-style"
+        submittedActivityDisplay.textContent = `Activity: ${submittedActivity}`;
+        jsonContainer.replaceChild(submittedActivityDisplay, inputContainer);
+      });
     } else {
-    const selectedOptionText = activitySelection.options[activitySelection.selectedIndex].textContent;
-    const selectedOptionDisplay = document.createElement('p');
-    selectedOptionDisplay.textContent = `Activity: ${selectedOptionText}`;
+      const selectedOptionText = activitySelection.options[activitySelection.selectedIndex].textContent;
+        const selectedOptionDisplay = document.createElement('p');
+        selectedOptionDisplay.className = "display-style"
+        selectedOptionDisplay.textContent = `Activity: ${selectedOptionText}`;
 
-    jsonContainer.replaceChild(selectedOptionDisplay, activitySelection);
+          jsonContainer.replaceChild(selectedOptionDisplay, activitySelection);
   };
 });
 
