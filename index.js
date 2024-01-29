@@ -88,9 +88,6 @@ function createActivitySelection() {
 };
 
 function activitySelectionEvent(activitySelection, jsonContainer) {
-  const changeActivityButton = document.createElement('button');
-  changeActivityButton.textContent = 'Change Activity';
-  
   activitySelection.addEventListener("change", () => {
     const selectedOption = activitySelection.value;
 
@@ -106,6 +103,7 @@ function activitySelectionEvent(activitySelection, jsonContainer) {
         const submittedActivityDisplay = createSubmittedActivityDisplay(submittedActivity, jsonContainer);
         jsonContainer.replaceChild(submittedActivityDisplay, inputContainer);
 
+        const changeActivityButton = submittedActivityDisplay.querySelector('button');
         changeActivityButton.addEventListener("click", () => {
           jsonContainer.replaceChild(activitySelection, submittedActivityDisplay);
         });
@@ -115,6 +113,7 @@ function activitySelectionEvent(activitySelection, jsonContainer) {
       const selectedOptionDisplay = createSelectedOptionDisplay(selectedOptionText, jsonContainer);
       jsonContainer.replaceChild(selectedOptionDisplay, activitySelection);
 
+      const changeActivityButton = selectedOptionDisplay.querySelector('button');
       changeActivityButton.addEventListener("click", () => {
       jsonContainer.replaceChild(activitySelection, selectedOptionDisplay);
       })
