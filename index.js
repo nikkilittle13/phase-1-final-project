@@ -66,7 +66,7 @@ dataseries.forEach (obj => {
   <div>Weather: ${obj.weather}</div>
   <div>Max Temp: ${maxTempFahrenheit}°F</div>
   <div>Min Temp: ${minTempFahrenheit}°F</div>
-  <div>Wind Speed: ${obj.wind10m_max}</div>
+  <div>Wind Speed: ${obj.wind10m_max} m/s</div>
   `;
 
   activitySelection.addEventListener('change', () => {
