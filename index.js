@@ -27,8 +27,10 @@ dataseries.forEach (obj => {
 
   function getWeatherCondition(weather) {
     const weatherMap = {
-      lightrain: "light rain",
-
+      lightrain: "Light Rain",
+      cloudy: "Cloudy",
+      clear: "Clear",
+      snow: "Snow",
     };
 
     return weatherMap[weather] || weather;
