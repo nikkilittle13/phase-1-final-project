@@ -7,11 +7,8 @@ const dataseries = data.dataseries;
 
 dataseries.forEach (obj => {
   const formattedDate = formatDate(obj.date);
-  const weatherCondition = getWeatherCondition(obj.weather);
-  const maxTempCelsius = obj.temp2m.max;
-  const minTempCelsius = obj.temp2m.min;
-  const maxTempFahrenheit = Math.round((maxTempCelsius * 9/5) + 32);
-  const minTempFahrenheit = Math.round((minTempCelsius * 9/5) + 32);
+  const maxTempCelsius = convertToCelsius(obj.temp2m.max);
+  const minTempCelsius = convertToCelsius(obj.temp2m.min);
 
   const date = createDate(formattedDate);
   const weatherIcon = createWeatherIcon();
@@ -30,6 +27,10 @@ function formatDate(dateFromAPI) {
   };
   return jsonDate.toLocaleDateString('en-US', dateOptions);
 };
+
+function convertToCelsius(temp) {
+  return Math.round((temp * 9/5) + 32);
+}
   
   function getWeatherCondition(weather) {
     const weatherMap = {
@@ -71,7 +72,7 @@ function createDate(formattedDate) {
 function createWeatherIcon() {
   const weatherIcon = document.createElement('div');
   weatherIcon.innerHTML = `
-  <div>Weather: ${weatherCondition}</div>
+  <div>Weather: ${getWeatherCondition(obj.weather)}</div>
   <div>Max Temp: ${maxTempFahrenheit}°F</div>
   <div>Min Temp: ${minTempFahrenheit}°F</div>
   <div>Wind Speed: ${obj.wind10m_max} m/s</div>
