@@ -113,7 +113,7 @@ dataseries.forEach (obj => {
 
         changeActivityButton.addEventListener("click", () => {
           jsonContainer.replaceChild(activitySelection, submittedActivityDisplay);
-        })
+        });
       });
     } else {
       const selectedOptionText = activitySelection.options[activitySelection.selectedIndex].textContent;
@@ -123,6 +123,10 @@ dataseries.forEach (obj => {
         selectedOptionDisplay.appendChild(changeActivityButton);
 
           jsonContainer.replaceChild(selectedOptionDisplay, activitySelection);
+
+          changeActivityButton.addEventListener("click", () => {
+            jsonContainer.replaceChild(activitySelection, selectedOptionDisplay);
+          })
   };
 });
 
