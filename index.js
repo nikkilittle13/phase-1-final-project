@@ -11,7 +11,10 @@ dataseries.forEach (obj => {
   const minTempCelsius = obj.temp2m.min;
   const maxTempFahrenheit = Math.round((maxTempCelsius * 9/5) + 32);
   const minTempFahrenheit = Math.round((minTempCelsius * 9/5) + 32);
-  
+
+  const jsonDate = document.createElement('h2');
+  const weatherIcon = document.createElement('div');
+  const activitySelection = createActivitySelection();
 })
 .catch(error => console.log(error));
 
@@ -27,9 +30,6 @@ function formatDate(dateFromAPI) {
   return date.toLocaleDateString('en-US', options);
 };
   
-
-  
-
   function getWeatherCondition(weather) {
     const weatherMap = {
       lightrain: "Light Rain",
@@ -38,45 +38,29 @@ function formatDate(dateFromAPI) {
       clear: "Clear",
       snow: "Snow",
     };
-
     return weatherMap[weather] || weather;
   }
 
-  const jsonDate = document.createElement('h2');
-  const weatherIcon = document.createElement('div');
+  function createActivitySelection() {
   const activitySelection = document.createElement('select');
 
-  const option1 = document.createElement('option');
-  option1.value = "";
-  option1.textContent = "--Please choose an activity--";
+  const activities = [
+    {value: "", text: "--Please choose an activity--"},
+    {value: "run", text: "Go for a run outside"},
+    {value: "clean", text: "Deep clean a room in the house"},
+    {value: "swim", text: "Swim 20 laps"},
+    {value: "dance", text: "Indoor dance workout"},
+    {value: "other", text: "Other"}
+  ];
 
-  const option2 = document.createElement('option');
-  option2.value = "run";
-  option2.textContent = "Go for a run outside";
+  activities.forEach(activity => {
+    const activityElement = document.createElement('option');
+    activityElement.value = activity.value;
+    activityElement.text = activity.text;
+    activitySelection.appendChild(activityElement)
+  });
+};
 
-  const option3 = document.createElement('option');
-  option3.value = "clean";
-  option3.textContent = "Deep clean a room in the house";
-
-  const option4 = document.createElement('option');
-  option4.value = "swim";
-  option4.textContent = "Swim 20 laps";
-
-  const option5 = document.createElement('option');
-  option5.value = "dance";
-  option5.textContent = "Indoor dance workout";
-
-  const option6 = document.createElement('option');
-  option6.value = "other";
-  option6.textContent = "Other";
-
-  activitySelection.appendChild(option1);
-  activitySelection.appendChild(option2);
-  activitySelection.appendChild(option3);
-  activitySelection.appendChild(option4);
-  activitySelection.appendChild(option5);
-  activitySelection.appendChild(option6);
-  
   jsonDate.textContent = `${formattedDate}`; 
 
   weatherIcon.innerHTML = `
