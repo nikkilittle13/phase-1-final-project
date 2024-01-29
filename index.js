@@ -84,6 +84,10 @@ dataseries.forEach (obj => {
 
   const changeActivityButton = document.createElement('button');
   changeActivityButton.textContent = 'Change Activity';
+
+  const submitButton = document.createElement('button');
+          submitButton.type = 'submit';
+          submitButton.textContent = 'Enter';
   
 
   activitySelection.addEventListener('change', () => {
@@ -94,9 +98,7 @@ dataseries.forEach (obj => {
         const inputBox = document.createElement('input');
         inputBox.type = 'text';
         inputBox.placeholder = "Enter activity";
-          const submitButton = document.createElement('button');
-          submitButton.type = 'submit';
-          submitButton.textContent = 'Enter';
+          
 
       inputContainer.appendChild(inputBox);
       inputContainer.appendChild(submitButton);
