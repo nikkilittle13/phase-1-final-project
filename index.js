@@ -38,23 +38,7 @@ dataseries.forEach (obj => {
 
   const jsonDate = document.createElement('h2');
   const weatherIcon = document.createElement('div');
-  
-  jsonDate.textContent = `${formattedDate}`; 
-
-  weatherIcon.innerHTML = `
-  <div>Weather: ${getWeatherCondition(obj.weather)}</div>
-  <div>Max Temp: ${maxTempFahrenheit}°F</div>
-  <div>Min Temp: ${minTempFahrenheit}°F</div>
-  <div>Wind Speed: ${obj.wind10m_max} m/s</div>
-  `;
-
-  let selectedOption = "";
-
-  const changeActivityButton = document.createElement('button');
-  changeActivityButton.textContent = 'Change Activity';
-
-  changeActivityButton.addEventListener("click", () => {
-    const activitySelection = document.createElement('select');
+  const activitySelection = document.createElement('select');
 
   const option1 = document.createElement('option');
   option1.value = "";
@@ -86,9 +70,23 @@ dataseries.forEach (obj => {
   activitySelection.appendChild(option4);
   activitySelection.appendChild(option5);
   activitySelection.appendChild(option6);
+  
+  jsonDate.textContent = `${formattedDate}`; 
+
+  weatherIcon.innerHTML = `
+  <div>Weather: ${getWeatherCondition(obj.weather)}</div>
+  <div>Max Temp: ${maxTempFahrenheit}°F</div>
+  <div>Min Temp: ${minTempFahrenheit}°F</div>
+  <div>Wind Speed: ${obj.wind10m_max} m/s</div>
+  `;
+
+
+  const changeActivityButton = document.createElement('button');
+  changeActivityButton.textContent = 'Change Activity';
+  changeActivityButton.addEventListener("click", () => {})
 
   activitySelection.addEventListener('change', () => {
-    selectedOption = activitySelection.value;
+   const selectedOption = activitySelection.value;
 
     if (selectedOption === "other") {
       const inputContainer = document.createElement('div');
@@ -119,12 +117,6 @@ dataseries.forEach (obj => {
           jsonContainer.replaceChild(selectedOptionDisplay, activitySelection);
   };
 });
-    jsonContainer.replaceChild(activitySelection, submittedActivityDisplay)
-  })
-
-
-  
-
 
   jsonContainer.appendChild(jsonDate);
   jsonContainer.appendChild(weatherIcon);
