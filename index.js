@@ -7,27 +7,28 @@ const dataseries = data.dataseries;
 
 dataseries.forEach (obj => {
   const formattedDate = formatDate(obj.date);
+  const weatherCondition = getWeatherCondition(obj.weather);
   const maxTempCelsius = obj.temp2m.max;
   const minTempCelsius = obj.temp2m.min;
   const maxTempFahrenheit = Math.round((maxTempCelsius * 9/5) + 32);
   const minTempFahrenheit = Math.round((minTempCelsius * 9/5) + 32);
 
-  const jsonDate = document.createElement('h2');
-  const weatherIcon = document.createElement('div');
+  const date = createDate(formattedDate);
+  const weatherIcon = createWeatherIcon();
   const activitySelection = createActivitySelection();
 })
 .catch(error => console.log(error));
 
 function formatDate(dateFromAPI) {
-  const date = new Date(dateFromAPI.toString().substr(0, 4), dateFromAPI.toString().substr(4, 2) - 1, dateFromAPI.toString().substr(6, 2));
-  const options = {
+  const jsonDate = new Date(dateFromAPI.toString().substr(0, 4), dateFromAPI.toString().substr(4, 2) - 1, dateFromAPI.toString().substr(6, 2));
+  const dateOptions = {
     weekday: 'long',
     year: 'numeric',
     month: 'long',
     day: 'numeric',
     timeZone: 'UTC'
   };
-  return date.toLocaleDateString('en-US', options);
+  return jsonDate.toLocaleDateString('en-US', dateOptions);
 };
   
   function getWeatherCondition(weather) {
@@ -61,14 +62,22 @@ function formatDate(dateFromAPI) {
   });
 };
 
-  jsonDate.textContent = `${formattedDate}`; 
+function createDate(formattedDate) {
+  const date = document.createElement('h2');
+  date.textContent = `${formattedDate}`; 
+  return date;
+};
 
+function createWeatherIcon() {
+  const weatherIcon = document.createElement('div');
   weatherIcon.innerHTML = `
-  <div>Weather: ${getWeatherCondition(obj.weather)}</div>
+  <div>Weather: ${weatherCondition}</div>
   <div>Max Temp: ${maxTempFahrenheit}°F</div>
   <div>Min Temp: ${minTempFahrenheit}°F</div>
   <div>Wind Speed: ${obj.wind10m_max} m/s</div>
   `;
+  return weatherIcon;
+}
 
 
   const changeActivityButton = document.createElement('button');
