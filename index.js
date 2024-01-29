@@ -28,6 +28,7 @@ dataseries.forEach (obj => {
   function getWeatherCondition(weather) {
     const weatherMap = {
       lightrain: "Light Rain",
+      pcloudy: "Partly Cloudy",
       cloudy: "Cloudy",
       clear: "Clear",
       snow: "Snow",
