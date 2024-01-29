@@ -83,7 +83,7 @@ dataseries.forEach (obj => {
 
   const changeActivityButton = document.createElement('button');
   changeActivityButton.textContent = 'Change Activity';
-  changeActivityButton.addEventListener("click", () => {})
+  
 
   activitySelection.addEventListener('change', () => {
    const selectedOption = activitySelection.value;
@@ -101,18 +101,26 @@ dataseries.forEach (obj => {
       inputContainer.appendChild(submitButton);
       jsonContainer.replaceChild(inputContainer, activitySelection);
 
+
       submitButton.addEventListener('click', () => {
         const submittedActivity = inputBox.value;
         const submittedActivityDisplay = document.createElement('p'); 
         submittedActivityDisplay.classList = "submitted-activity-style"
         submittedActivityDisplay.textContent = `Activity: ${submittedActivity}`;
+        submittedActivityDisplay.appendChild(changeActivityButton);
+
         jsonContainer.replaceChild(submittedActivityDisplay, inputContainer);
+
+        changeActivityButton.addEventListener("click", () => {
+          jsonContainer.replaceChild(activitySelection, submittedActivityDisplay);
+        })
       });
     } else {
       const selectedOptionText = activitySelection.options[activitySelection.selectedIndex].textContent;
         const selectedOptionDisplay = document.createElement('p');
         selectedOptionDisplay.className = "display-style"
         selectedOptionDisplay.textContent = `Activity: ${selectedOptionText}`;
+        selectedOptionDisplay.appendChild(changeActivityButton);
 
           jsonContainer.replaceChild(selectedOptionDisplay, activitySelection);
   };
