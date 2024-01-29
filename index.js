@@ -25,6 +25,15 @@ dataseries.forEach (obj => {
   const maxTempFahrenheit = Math.round((maxTempCelsius * 9/5) + 32);
   const minTempFahrenheit = Math.round((minTempCelsius * 9/5) + 32);
 
+  function getWeatherCondition(weather) {
+    const weatherMap = {
+      lightrain: "light rain",
+
+    };
+
+    return weatherMap[weather] || weather;
+  }
+
   const jsonDate = document.createElement('h2');
   const weatherIcon = document.createElement('div');
   const activitySelection = document.createElement('select');
@@ -63,7 +72,7 @@ dataseries.forEach (obj => {
   jsonDate.textContent = `${formattedDate}`; 
 
   weatherIcon.innerHTML = `
-  <div>Weather: ${obj.weather}</div>
+  <div>Weather: ${getWeatherCondition(obj.weather)}</div>
   <div>Max Temp: ${maxTempFahrenheit}°F</div>
   <div>Min Temp: ${minTempFahrenheit}°F</div>
   <div>Wind Speed: ${obj.wind10m_max} m/s</div>
