@@ -6,9 +6,17 @@ const jsonContainer = document.getElementById('jsonContainer');
 const dataseries = data.dataseries;
 
 dataseries.forEach (obj => {
-  const dateFromAPI = obj.date;
-  const date = new Date(dateFromAPI.toString().substr(0, 4), dateFromAPI.toString().substr(4, 2) - 1, dateFromAPI.toString().substr(6, 2));
+  const formattedDate = formatDate(obj.date);
+  const maxTempCelsius = obj.temp2m.max;
+  const minTempCelsius = obj.temp2m.min;
+  const maxTempFahrenheit = Math.round((maxTempCelsius * 9/5) + 32);
+  const minTempFahrenheit = Math.round((minTempCelsius * 9/5) + 32);
+  
+})
+.catch(error => console.log(error));
 
+function formatDate(dateFromAPI) {
+  const date = new Date(dateFromAPI.toString().substr(0, 4), dateFromAPI.toString().substr(4, 2) - 1, dateFromAPI.toString().substr(6, 2));
   const options = {
     weekday: 'long',
     year: 'numeric',
@@ -16,14 +24,11 @@ dataseries.forEach (obj => {
     day: 'numeric',
     timeZone: 'UTC'
   };
+  return date.toLocaleDateString('en-US', options);
+};
+  
 
-  const formattedDate = date.toLocaleDateString('en-US', options);
-
-
-  const maxTempCelsius = obj.temp2m.max;
-  const minTempCelsius = obj.temp2m.min;
-  const maxTempFahrenheit = Math.round((maxTempCelsius * 9/5) + 32);
-  const minTempFahrenheit = Math.round((minTempCelsius * 9/5) + 32);
+  
 
   function getWeatherCondition(weather) {
     const weatherMap = {
@@ -86,8 +91,8 @@ dataseries.forEach (obj => {
   changeActivityButton.textContent = 'Change Activity';
 
   const submitButton = document.createElement('button');
-          submitButton.type = 'submit';
-          submitButton.textContent = 'Enter';
+    submitButton.type = 'submit';
+    submitButton.textContent = 'Enter';
   
 
   activitySelection.addEventListener('change', () => {
@@ -99,7 +104,6 @@ dataseries.forEach (obj => {
         inputBox.type = 'text';
         inputBox.placeholder = "Enter activity";
           
-
       inputContainer.appendChild(inputBox);
       inputContainer.appendChild(submitButton);
       jsonContainer.replaceChild(inputContainer, activitySelection);
@@ -137,6 +141,4 @@ dataseries.forEach (obj => {
   jsonContainer.appendChild(weatherIcon);
   jsonContainer.appendChild(activitySelection);
 })
-})
-.catch(error => console.log(error));
 });
