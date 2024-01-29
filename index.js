@@ -80,6 +80,9 @@ dataseries.forEach (obj => {
   <div>Wind Speed: ${obj.wind10m_max} m/s</div>
   `;
 
+  const changeActivityButton = document.createElement('button');
+  
+
   activitySelection.addEventListener('change', () => {
     const selectedOption = activitySelection.value;
 
