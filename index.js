@@ -7,8 +7,8 @@ const dataseries = data.dataseries;
 
 dataseries.forEach (obj => {
   const formattedDate = formatDate(obj.date);
-  const maxTempFahrenheit= convertToCelsius(obj.temp2m.max);
-  const minTempFahrenheit = convertToCelsius(obj.temp2m.min);
+  const maxTempFahrenheit= convertToFahrenheit(obj.temp2m.max);
+  const minTempFahrenheit = convertToFahrenheit(obj.temp2m.min);
   const weatherCondition = getWeatherCondition(obj.weather);
 
   const date = createDate(formattedDate);
@@ -34,7 +34,7 @@ function formatDate(dateFromAPI) {
   return jsonDate.toLocaleDateString('en-US', dateOptions);
 };
 
-function convertToCelsius(temp) {
+function convertToFahrenheit(temp) {
   return Math.round((temp * 9/5) + 32);
 }
   
